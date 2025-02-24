@@ -2,6 +2,7 @@ import pandas as pd        # tratar los datos frames (tablas en python)
 import altair as alt       # elaborar gráficos
 import datapane as dp      # generar informes
 import os
+from PySide6.QtWidgets import QMainWindow, QComboBox
 
 fichero_csv = "prueba.csv"
 df = pd.read_csv(fichero_csv)
@@ -34,6 +35,17 @@ def generar_informe(mes):
 
     ruta_reporte = os.path.abspath("informe_ventas2.html")
     reporte.save(ruta_reporte)
+
+## CLASE VENTANA PRINCIPAL
+class VentanaPrincipal(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Informe Ventas")
+
+        self.selector_mes = QComboBox()
+        self.selector_mes.addItem(df["Mes"].unique())
+
+
 
 
 if __name__ == "__main__":
